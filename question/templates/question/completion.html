@@ -1,0 +1,20 @@
+{% extends 'question/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container-contact100">
+		<div class="wrap-contact200">
+				<span class="contact100-form-title">
+					{{form.document_title}}
+				</span>				
+					<h3><b>File Name Application:</b> &nbsp{{form.file_name}}</h3><br>
+					<h2 style='text-align:center;'><b>{{form.text_container1}}</b></h2><br><br>
+				{% for a in response.answer.all %}
+					<h3><b>{{a.question}} :</b> &nbsp{{a.answer}}</h3><br>
+				{% endfor %}
+					<h3><b>{{form.text_container2}}</b></h3><br>
+					<h5><b>Signature Code :</b> &nbsp{{response.code}}</h5>
+		</div>
+	</div>
+	
+{% endblock %}

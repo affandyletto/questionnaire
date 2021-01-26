@@ -1,0 +1,40 @@
+{% extends 'question/base.html' %}
+{% load static %}
+{% block body %}
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="POST">
+				{% csrf_token %}
+				<input type="hidden" name="slug" value="{{form.slug}}"/>
+				<span class="contact100-form-title">
+					{{form.form_name}}
+				</span>
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<span class="label-input100">Email</span>
+					<input class="input100" type="text" value="{{response.email}}" disabled>
+					<span class="focus-input100"></span>
+				</div>
+				{% for a in response.answer.all %}
+				<div class="wrap-input100 validate-input">					
+					<span class="label-input100">{{a.question}}</span>
+					{% if a.field_type == "Text Input" %}
+						<input class="input100" type="text" value="{{a.answer}}" disabled>
+					{% elif a.field_type == "Text Area" %}
+						<textarea class="input100" value="{{a.answer}}"disabled></textarea>
+					{% elif a.field_type == "Drop Down" %}
+						<div>
+							<select class="selection-2" value="{{a.answer}}"disabled>
+								{% for z in a.multiple.all %}
+									<option>{{z.text}}</option>
+								{% endfor %}
+							</select>
+						</div>
+					{% endif %}
+					<span class="focus-input100"></span>
+				</div>
+				{% endfor %}
+			</form>
+		</div>
+	</div>
+
+	{% endblock %}

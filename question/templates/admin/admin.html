@@ -1,0 +1,52 @@
+{% extends 'question/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container-contact100">
+	<div class="wrap-contact300">
+		<table class="display table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Form ID</th>
+					<th>Form Name</th>
+					<th>Form URL</th>
+					<th>Response Count</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for form in object_list %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{form.id}}</td>
+					<td>
+						{{form}}
+					</td>
+					<td>
+						<a href="{% url 'question:question' form.slug %}">{% url 'question:question' form.slug %}</a>
+					</td>	
+					<td>
+						{{form.response.count}}
+					</td>
+					<td>
+						<div class="d-block my-1">
+		                    <a href="{% url 'response' form.slug %}" title="Response" class="btn btn-icon btn-info mb-1">
+		                        <i class="fa fa-eye"></i>
+		                    </a>
+
+		                    <a href="" title="Edit" class="btn btn-icon btn-secondary mb-1">
+		                        <i class="fa fa-pencil"></i>
+		                    </a>
+		                    <a href="" title="Hapus" class="btn btn-icon btn-danger mb-1" onclick="return confirm('Are you sure to delete this form with corresponding response ?');">
+		                        <i class="fa fa-trash"></i>
+		                    </a>		        
+		                </div>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+			
+		</table>		
+	</div>
+</div>
+{% endblock %}

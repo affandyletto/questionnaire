@@ -1,0 +1,57 @@
+{% extends 'question/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container-contact100">
+	<div class="wrap-contact300">
+		<span class="contact100-form-title">
+			{{form.form_name}}
+		</span>
+		<table class="display table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Response ID</th>
+					<th>Email</th>
+					<th>Response URL</th>
+					<th>Response Document</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for response in response %}
+				<tr>
+					<td>{{ forloop.counter }}</td>
+					<td>{{response.id}}</td>
+					<td>
+						{{response.email}}
+					</td>
+					<td>
+						<a href="{% url 'question:form_answer' form.slug response.slug %}">{% url 'question:form_answer' form.slug response.slug %}</a>
+					</td>	
+					<td>
+						<a href="{% url 'question:completion' form.slug response.code response.slug %}">{{response.code}}</a>
+						
+					</td>
+					<td>Verified</td>
+					<td>
+						<div class="d-block my-1">
+		                    <a href="" title="Preview" class="btn btn-icon btn-info mb-1">
+		                        <i class="fa fa-eye"></i>
+		                    </a>
+
+		                    <a href="" title="Edit" class="btn btn-icon btn-secondary mb-1">
+		                        <i class="fa fa-pencil"></i>
+		                    </a>
+		                    <a href="" title="Hapus" class="btn btn-icon btn-danger mb-1" onclick="return confirm('Are you sure to delete this form with corresponding response ?');">
+		                        <i class="fa fa-trash"></i>
+		                    </a>		        
+		                </div>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>			
+		</table>		
+	</div>
+</div>
+{% endblock %}
